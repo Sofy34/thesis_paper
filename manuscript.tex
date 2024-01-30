@@ -1,0 +1,579 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+
+\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{multirow}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\journal{Artificial Intelligence in Medicine}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \affiliation for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%            addressline={}, 
+%%            city={},
+%%            postcode={}, 
+%%            state={},
+%%            country={}}
+%% \fntext[label3]{}
+
+\title{APhyND - An Algorithmic Framework for Automatic Narrative Detection in Psychotherapy Session Transcripts}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+\author[l1]{Sofya Zubtsovsky\corref{cor1}}
+\ead{sofy.zu@gmail.com}
+\cortext[cor1]{Corresponding author}
+\affiliation[l1]{organization={Holon Institute of Technology},
+            addressline={Golomb 52}, 
+            city={Holon},
+            postcode={5810201}, 
+            country={Israel}}
+\author[l2]{Jonathan Schler}
+\ead{schler@hit.ac.il}
+\author[l3]{Rivka Tuval-Mashiach}
+\ead{tuvalmr@mail.biu.ac.il}
+\affiliation[l2,l3]{organization={Bar-Ilan University},
+            city={Ramat Gan},
+            postcode={590002}, 
+            country={Israel}}
+\begin{abstract}
+%% Text of abstract
+The narratives expressed by patients during psychotherapy sessions provide a cognitive framework through which they process their experiences. These narratives offer therapists valuable insights and the ability to draw meaningful conclusions. However, a notable challenge in this context lies in the intricate nature of narrative criteria and the lack of a universally accepted, objective model for defining the specific content and boundaries of narratives. The existing methods for detecting narratives in therapy transcripts heavily rely on manual approaches, which can be time-consuming and potentially subjective, leading to less reliable results. To address these limitations, this paper proposes a layered framework for automatic narrative detection in psychotherapy session transcripts. The framework consists of several steps, including corpus processing, feature extraction, BERT and Conditional Random Fields model, ensemble classification, prediction smoothing, and narrative merging. By leveraging these techniques, the proposed framework aims to automate the process of narrative detection, enhancing efficiency and reducing reliance on manual analysis. To evaluate the effectiveness of the framework, an experiment was conducted on a dataset comprised of 38434 sentences from psychotherapy sessions in Hebrew. Evaluation metrics such as f1-score, narrative recall and precision are utilized to measure performance. The experimental results demonstrate that the proposed model successfully captures narratives and surpasses certain state-of-the-art models in terms of accuracy and effectiveness.
+\end{abstract}
+
+%%Graphical abstract
+% \begin{graphicalabstract}
+% %\includegraphics{grabs}
+% \end{graphicalabstract}
+
+%%Research highlights
+\begin{highlights}
+\item APhyND outperforms state-of-the-art methods in narrative detection accuracy
+\item BERT embeddings provide semantic information and lexical content
+\item Conditional random fields model utilizes meta, lexical and positional features
+\item The ensemble layer effectively addresses errors from each model
+\item Threshold adjustment and smoothing layer enhance performance
+\end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+Natural language processing  \sep Text Segmentation \sep Narrative detection \sep Psychotherapy
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+\section{Introduction}
+Psychotherapy, a form of therapy that involves a conversation between a client and a therapist, plays a crucial role in addressing mental health concerns. During a therapy session, clients express their thoughts, emotions, and share personal narratives. 
+
+A "narrative" is a multidisciplinary term and commonly treated in literature as synonymous with "story" \cite{norambuena2023survey}. 
+
+In the context of psychotherapy, a narrative might be considered the “root metaphor” of psychology \cite{sarbin1986narrative}. It is an account of a series of related events or experiences and is seen as a cognitive way of processing and making sense of the client's experience \cite{hetrick2015back}.
+
+Analyzing narratives within psychotherapy sessions allows therapists to identify recurring themes, patterns, and significant events. By examining these narrative elements, therapists can uncover underlying meanings, explore unresolved issues, and facilitate personal growth and healing  \cite{wong2018narrative}.  Among other qualities, a narrative's fullness, coherence, and integrity reflect an individual's mental and emotional state \cite{duero2018phenomenological}. The analysis of narratives is an essential component of effective psychotherapy  \cite{botella2011narrative}. 
+
+However, the current practice of narrative analysis in psychotherapy heavily relies on manual examination \cite{angus1994narrative,gonccalves2010innovative,botella2011narrative}, which is time-consuming and labor-intensive. With a large volume of session transcripts to analyze, therapists face significant challenges in conducting comprehensive narrative assessments for multiple clients. 
+
+The task of automatically identifying the narrative segments in the text, however, appears to be a considerable challenge. Divergence between narrative and non-narrative text is ambiguous, and the position of narrative boundary is difficult to determine precisely. The narrative detection task requires selection of lexical and contextual features that would capture a narrative structure independent of the content, conversation style or specific topic of the text. Being an unstructured dialogue with multiple context switches, narrative in psychotherapy sessions includes ongoing unfolding of different stories that are often told in parallel, and are incomplete, interrupted, and are missing some narrative elements.
+
+In addition, Hebrew is a morphologically rich language that requires specific processing before any features can be extracted from the text. There is a great deal of complexity involved in the process of defining an appropriate framework and model parameters.
+
+The absence of tools for extracting narratives compounds this problem, limiting the scalability and efficiency of narrative detection in psychotherapy.
+
+To address this critical gap, this paper introduces the APhyND (Automatic Psychology Narrative Detection) framework for automatic narrative detection in psychotherapy session transcripts. By leveraging machine learning techniques and natural language processing, our framework aims to automate the process of identifying and extracting narratives from text data. This approach has the potential to significantly impact the field of psychotherapy by providing therapists with a powerful tool to analyze narratives efficiently across multiple clients and sessions.
+
+We believe that the ability to detect and analyze narratives will revolutionize psychotherapy practice, enabling therapists to uncover valuable insights from large volumes of session data and ultimately enhance the effectiveness of therapeutic interventions.
+
+\section{Previous work}
+In previous research, the differentiation between narrative and story was not explicitly clear, and the emphasis primarily revolved around analyzing stories. In this context, narratives have been characterized as a coherent system of interrelated stories \cite{halverson2011master}, with story itself being defined as a sequence of events \cite{wake2013narrative}. 
+
+The majority of existing automated methods to capture a story use event extraction as a key step in understanding stories \cite{norambuena2023survey}, and most of the studies were conveyed on very strict corpus such a news articles \cite{levi2022detecting, yu2021automatic, ge2010story, chambers2008unsupervised}, movie plots \cite{martin2018event}, primary schools essays \cite{halpin2006event} and Tweet posts \cite{wang2019open}. 
+
+Detecting stories among studies was also accomplished by predicting their boundaries based on topic shift. To detect story in a news broadcast, Rosenberg \cite{rosenberg2006story} used lexical features, which included cosine similarity of sentence sequences, repetitions of stemmed content words, counts of cue-words empirically selected from training data, sentence length based on word count, and relative sentence position, reaching f1-score of $0.29$.
+
+Various studies \cite{gordon2007automated,swansonfirst,engin2021hidden} have indicated that topic boundaries alone are insufficient for automated text segmentation. Instead, they aimed to separate story content from the surrounding context, regardless of topic shifts. Many of these works focused on understanding the overall story through dialogue.
+
+Gordon \cite{gordon2005automated} introduced an automated system for extracting stories by applying statistical text classification to transcripts of interviews with army officers. This endeavor yielded an f1-score of $0.58$ for the story label and a weighted average f1-score of $0.642$. In a subsequent investigation, the integration of statistical story extraction with automated sentence delimiters led to an f1-score of $0.51$ for the story label\cite{gordon2007automated}.
+
+Building upon Gordon's approach, Swanson \cite{swansonfirst} implemented a classification model for story detection using a corpus of web-blogs. By incorporating lexical n-grams and part-of-speech tags, the model achieved an f1-score of 0.40 for the story-level prediction task.
+
+While previous studies have made significant contributions to story extraction, there are distinct differences in our approach that make it novel and unique. Firstly, previous studies primarily applied their approaches to texts that were initially built to convey a distinct story, such as novels  \cite{iikura2021paragraph}, web-blogs \cite{swansonfirst} and interview transcripts \cite{gordon2007automated}.
+
+In contrast, our research focuses on psychotherapy session transcripts where narratives are conveyed in a parallel, incomplete, and overlapping manner. This context presents a distinct set of challenges, requiring specialized techniques to accurately identify and extract narrative segments amidst the dynamic and intertwined nature of the dialogue.
+
+Moreover, unlike previous works that primarily focused on English, our research specifically targets the Hebrew language. This distinction is essential as the linguistic characteristics and nuances of Hebrew necessitate tailored methodologies and considerations.
+
+By addressing these novel aspects, our approach contributes to the advancement of automatic narrative detection in the unique context of psychotherapy sessions, showcasing the applicability of our methodology to a specific domain that has remained unexplored in previous works.
+
+\section{Methodology}
+
+We treat narrative detection as a supervised learning task, where the input is a transcript, represented as a sequence of $n$ sentences ($s_{1}$, ...$s_{n}$) and the sequence of $n$ labels $y$ = ($y_{1}$, ... $y_{n}$), where $y_{i}$ is a binary value which denotes whether $s_{i}$ belongs to a narrative or not.
+
+\subsection{Defining narrative criteria in psychotherapy sessions}
+
+The first methodological step we needed to take was establishing  a clear definition of narrative as it relates to psychotherapy sessions. While a general definition existed, it lacked specificity for applied research in this context. To address this limitation, we refined the narrative criteria by analyzing actual psychotherapy sessions conducted in Hebrew.
+
+To accomplish this, we enlisted the expertise of three domain experts who reviewed session transcripts and identified continuous segments of narrative content. After independently labeling the narratives, the raters reached a consensus on the following criteria of narrative within the context of our study. A narrative is characterized by the following:
+\begin{enumerate}
+   \item 
+   is a continuous segment (without excluded sentences in the middle)
+    \item 
+ might include utterances from both a client and a therapist (when the therapist asks a question in the middle of the story)
+  \item 
+ is dedicated to a single topic (can be summarized in one or two words, such as "relocation", "quarrel", "family travel")
+  \item  
+  typically includes details about a specific environment, time and place ("last week at work", "last year on a trip")
+  \item 
+  usually spoken in the past tense, from a first person view ("I remember", "I went", "she said to me")
+    \item 
+ includes three key components, either explicitly or implicitly:
+ \begin{enumerate}
+ \item one or more characters who are participating in the story
+ \item actions that these characters engage in, such as conversations, work-related tasks, changes in roles, or travel
+ \item a noticeable change that the character's actions lead to, such as shifts in relationships, transformations in mental states, or physical relocations
+ \end{enumerate}
+\end{enumerate}
+
+According to these criteria, the segment "\emph{I remember a situation, that we sat in front of the television, my sister and I, and I remember that I pinched her}" is defined as a narrative since it includes clear circumstances, an actor and his action. The segment "\emph{They always said that I'm similar to my older sister, both in style and appearance}" is not a narrative because it includes a description of circumstances and settings, however, there is no explicit action, change or resolution.
+
+
+\subsection{Framework structure}
+
+Figure \ref{fig:framework.pipeline} outlines the methodology we developed and provides a roadmap for the article. APhyND takes a single psychotherapy session transcript as input and produces a list of detected narrative segments as output. The framework consists of several steps: transcript processing, feature extraction, BERT \cite{devlin2018bert} model implementation, sequence assembly, Conditional Random Fields (CRF)  \cite{lafferty2001conditional} model implementation, ensemble classification, prediction smoothing, and narrative merge.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{entire.model.pdf}
+  \caption{A flowchart of the framework pipeline}
+   \label{fig:framework.pipeline}
+  % \Description{There are 8 connected blocks (from left to right): transcript processing results in sentence text and features. Sentence features passed to the sequence assemble and further to the CRF block. The text passed to the BERT. Both BERT and CRF blocks connected to the ensemble classifier, which is connected to the prediction smoothing block, which is connected to the narrative merge.}
+\end{figure}
+
+
+\subsubsection{Transcript Processing}
+
+In this step, the objective is to extract sentences and their corresponding features from a transcript. Each document represents a separate psychotherapy session, and was created by transcribing audio recordings lasting between $45$ to $55$ minutes.
+
+Since each document might be automatically generated or transcribed by different individuals, there was no standardization regarding the special symbols used. To ensure consistency and facilitate analysis, we applied a cleaning procedure to the text, which included the following steps:
+\begin{enumerate}
+    \item 
+Anonymous named entity encoding: Various named entities such as cities, organizations, and human names were encoded differently across the sessions (using symbols like XXX, XXXX, XX, X). To maintain anonymity and ensure uniformity, we replaced all such named entities with the string "XXX".
+
+\item
+Number standardization: The numbers found in the corpus represented different types of information such as hours, ages, amounts of money, and time. Since our focus was not on the specific combinations of digits, we replaced all digits with the string "$123$". This reduced the number of generated n-grams and minimized variations within n-grams.
+
+\item
+Removal of non-verbal marks: Non-verbal elements such as laughter, background noise, and intonation were removed from the text to eliminate any potential interference during analysis.
+
+\item
+Deletion of time-stamps: Time-stamps that were used to segment the corpus into distinct parts were removed to streamline the subsequent analysis.
+\end{enumerate}
+
+After cleaning, the transcript was segmented into paragraphs based on alternating speaker utterances (between the client and therapist). Each paragraph was further divided into sentences using dot punctuation marks. 
+
+\subsubsection{Feature space}
+
+For each sentence $s_{i}$ of a document, we extracted text and constructed a feature set encompassing the following components:
+\begin{enumerate}
+   \item Lexical Features
+
+We obtained TF-IDF  vectors  \cite{grossman2002information} for $3$ types of features.
+
+\textbf{N-grams}: We extracted contiguous sequences of 3, 4, and 5 characters from the sentence, including white spaces.
+
+\textbf{Words}: The sentence was split using white space as a delimiter, preserving word form, including tense and singular/plural attributes.
+
+\textbf{Lemmas}: We obtained the root form of each word by resolving disambiguation through a morphological parser specifically designed for Hebrew (YaP)\cite{moretsarfatycoling2016}.
+
+\item Meta Features
+
+\textbf{Question marks}: A binary value, where 0.5 indicates that the sentence is a question.
+
+\textbf{Speaker marks}: A binary value, with 0.5 denoting a client's utterance and 0 representing a therapist's utterance.
+
+\textbf{Length }in tokens and characters: A value between 0 and 1, scaled by the length of the longest sentence in the transcript.
+
+\textbf{Similarity to neighboring sentence}s: Four values ranging from $0$ to $1$, representing the similarity of $s_{i}$ to the previous two sentences and the next two sentences ( $s_{i-2}$, $s_{i-1}$,  $s_{i+1}$,  $s_{i+2}$). Similarity was measured using cosine similarity between embedded vectors of a length of 300, obtained from a pre-trained fastText model for Hebrew \cite{grave2018learning}.
+
+\textbf{Part-of-speech (PoS) tag and morphological tags}: A dictionary where the keys represent PoS tags and the values are real numbers between 0 and 1, indicating the density of a particular part-of-speech in $s_{i}$. For example, if $2$ out of $6$ words in a sentence are verbs in the past tense, the entry "past\_tense: $0.33$" would be included in the feature set.
+
+\item Positional Features
+
+\textbf{Sentence position within the document}: A value between $0$ and $1$, indicating the relative position of $s_{i}$ along the sequence of sentences in the document. If $s_{i}$ appears at the beginning of the document, the feature is set to $0$. If it is at the end of the document, the position is $1$. Otherwise, the feature is set to  $i/n$, where $i$ denotes the sentence's index within total $n$ sentences of the document. 
+
+Similar positional features were calculated for \textbf{sentence position within a paragraph} and \textbf{paragraph position within the document}.
+\end{enumerate}
+
+\subsubsection{BERT Model}
+
+Our model utilizes a BERT \cite{devlin2018bert} model pre-trained on a sizable Hebrew corpus, eliminating the need for extensive feature engineering. BERT effectively learns words' order and semantic content within each sentence, treating them independently.
+
+To adapt the pre-trained BERT model for the specific narrative/non-narrative classification task in our study, we employed the fine-tuning approach, also known as model-tuning or transfer learning. In this method, we preserved the weights of all layers in the BERT architecture and added two additional neural network layers with a softmax activation function \cite{devlin2018bert}. These additional layers, consisting of dense linear layers with 512 and 2 nodes respectively, were attached to the pre-trained model. % (Figure ~\ref{fig:bert.arch}) 
+We trained this modified model using a sequential load format of Hebrew sentence inputs.
+
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width=0.5\linewidth]
+%   {bert.arch.pdf}
+% \caption{Architecture of the BERT-based classification model}
+%    \label{fig:bert.arch}
+% % \Description{Four connected layers, bottom up. Sentence tokens are connected to pre-trained BERT layer with 768 output nodes. Next two layers consist of 512 and 2 nodes, mutually connected. The 2 nodes are connected to softmax layer which result in class label.}
+% \end{figure}
+
+During the training process, only the weights of the attached layers were updated. Raw sentences were fed into the model to predict binary labels, where a label of 1 corresponded to the narrative class and 0 corresponded to the non-narrative class.
+
+Before inputting the sentences into the BERT model, we preprocessed them using a Hebrew tokenizer specifically designed for the Hebrew language, which can be found at Hugging Face library \cite{hugface}.
+
+
+\subsubsection{Sequence Assembly}
+In order to prepare the input for the CRF model, it was necessary to assemble sentences along with their corresponding feature sets into sequences.
+
+The CRF model demonstrates the capability to leverage transit features, which enables it to capture the characteristics of the current state and the subsequent state. In our study, the transitions from one label to another occur at specific boundary points within a narrative. These boundary points consist of start and end positions. A start boundary point is identified when the current sentence has a non-narrative label, and the subsequent sentence is classified as narrative. Conversely, an end boundary point occurs when the current sentence is labeled as narrative, and the subsequent sentence is classified as non-narrative.
+
+To effectively harness the CRF model's ability to capture crucial state transitions, it was imperative to ensure that the model's input encompassed narrative boundaries. 
+
+\subsubsection{CRF Model}
+
+Due to the observation that narratives appeared as continuous segments in the form of sequences of sentences, we approached the narrative extraction task as a sequence labeling problem. We incorporated a CRF model as an additional component to address the sequential dependencies present within the narrative, including both the relationships between sentences and narrative boundaries. This was necessary because BERT, by considering each sentence as an isolated unit, lacks the capability to capture such dependencies.
+
+By representing the transcript as a sequence of sentences, we trained the CRF model to capture the relationships between successive sentences by learning various properties of the sentence and those of its neighbor, such as part-of-speech, word form, and whether the sentence belonged to a client or was a question. 
+
+\subsubsection{Ensemble Classifier}
+
+In the subsequent block of our framework, we employed an ensemble of classifiers for narrative detection. This involved combining the output of the BERT and CRF models to obtain the final classification labels.
+
+This strategy was chosen based on the evidence that model ensembles can enhance classification performance when individually trained classifiers make errors on different samples or are trained on distinct sets of features. By leveraging the complementary strengths of each model, correct predictions from one model can compensate for the shortcomings of another, leading to improved overall prediction accuracy \cite{zhuang2020comprehensive}.
+
+To implement the model ensemble, we adopted a stacking approach and utilized four values per sentence as inputs for the ensemble model. These values consisted of the narrative and non-narrative label probabilities generated by BERT, as well as the narrative and non-narrative label probabilities obtained from the CRF model. All of these values ranged between $0$ and $1$.
+
+\textbf{Threshold adjustment}: In the specific context of our study, it is important to note that we expected the data to be unbalanced due to the nature of the therapy sessions under investigation. The narrative aspect, which serves as a minor part of these sessions, inherently leads to a limited number of sentences related to the positive class. Consequently, the majority class (non-narrative) dominates the dataset, creating a significant class imbalance. 
+
+Recognizing this characteristic, we adjusted the classification threshold to align with the ratio of the positive class, enabling our model to effectively capture and interpret the narrative instances. By accounting for the anticipated class imbalance, our approach ensures that the binary classification system remains sensitive to the narrative elements, despite their relative scarcity within the overall therapy session data.
+
+\subsubsection{Prediction smoothing}
+
+In the subsequent step, we applied two types of smoothing techniques to the output labels generated by the ensemble classifier.
+
+\begin{enumerate}
+
+\item Smoothing single sentence holes within the middle of a narrative segment: In this step, we replaced a negative label with a positive label. A single sentence hole refers to a non-narrative sentence that is surrounded by narrative sentences.
+
+In our analysis, we treated a single non-narrative sentence occurring between two narrative segments as a "hole" rather than a separator between two distinct narratives. This approach was based on the observation that in psychotherapy sessions, clients typically do not share narratives in quick succession without any non-narrative content in between.
+
+To illustrate the smoothing procedure, Figure \ref{fig:fn.middle} demonstrates an example where one sentence within a narrative segment is predicted to have a negative label by the model. 
+
+In this representation, each square corresponds to a sentence, and an empty square labeled with $0$ indicates a non-narrative sentence, while a filled square labeled with $1$ represents a narrative sentence.
+    \begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{fn.middle.pdf}
+\caption{Smoothing of a single sentence hole in the middle of predicted narrative}
+% \Description{Two rows of 9 squares each. The upper row 9predicted labels) consist of (from left to right) 2 white, 2 grey, 1 white, 2 grey and 2 white squares. The lower row (smoothed labels) consist of 2 white, 5 grey and 2 white squares.}
+\label{fig:fn.middle}
+\end{figure}
+
+\item Smoothing single sentence narratives: A single sentence narrative indicates a narrative sentence where all four of its neighboring sentences have non-narrative labels.  Here, we replaced a positive label with a negative label.
+
+Single sentence narratives were disregarded in our study because, in the context of psychotherapy, a narrative is typically defined as containing sufficient content for analysis, which necessitates the inclusion of more than one sentence.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{fp.alone.pdf}
+\caption{Smoothing of a single sentence narrative}
+% \Description{Two rows of 9 squares each. The upper row (predicted labels) consist of (from left to right) 4 white, one grey and 4 white squares. The lower row (smoothed labels) consist of all white squares.}
+\label{fig:fp.alone}
+\end{figure}
+\end{enumerate}
+
+\subsubsection{Narrative Merge}
+
+A narrative merge process was performed to concatenate consecutive sequences of sentences that received positive labels into coherent narratives.
+
+\section{Experiment}
+
+We turn now to evaluating our APhyND framework. After describing the datasets (Section \ref{sec:Dataset}), we consider the cross-validation method (Section \ref{sec:Cross-validation}) and evaluation parameters (Section \ref{sec:Evaluation Parameters}). Then, we describe the models' implementation that were selected for each block of the framework (Section \ref{sec:Models Selection}). Finally, we conduct a study to determine the impact of different components of APhyND (Section \ref{sec:Component Performance}) and to evaluate the overall framework performance (Section \ref{sec:Framework Evaluation}).
+
+\subsection{Dataset} \label{sec:Dataset}
+
+The experiment was conducted on $38434$ sentences taken from $79$ psychotherapy session transcripts in Hebrew. The transcripts were obtained from $8$ distinct clients, for each client $10$ arbitrary sessions were selected (with the exception of one client with $9$ sessions). The transcripts were manually transcribed from audio recordings and structured as Hebrew text documents, arranged in paragraphs that alternated between the client's and therapist's utterances.
+
+The transcripts yielded  $15108$ paragraphs and  $444702$ transcribed words. The average document length was $192.24$ paragraphs ($\sigma=112.80$, median=$156$) and $486.51$ sentences ($\sigma=194.34$, median=$471$).
+
+$26\%$ of the sentences were labeled as $648$ continuous narrative segments by two human raters according to the criteria defined above, from $1$ up to $18$ narratives in a single session. The average number of narratives per transcript was $8.20$ ($\sigma=3.83$, median=$8$). 
+
+An analysis of the continuous narrative segments indicated a high dispersal of length: the mean length of a narrative was $15.13$ sentences (median=$9$, $\sigma=21.36$) and $159.38$ words ($\sigma=204.72$, median=$105$).
+
+The average length of a narrative sentence was $10.52$ words ($\sigma=10.41$, median=$7$). For non-narrative sentences the mean length was $8.89$ words ($\sigma=8.95$, median=$6$). 
+
+$36$\% of the narratives started in the first sentence of a paragraph and $97$\% narratives started with the client's sentence. 
+
+\subsection{Cross-validation} \label{sec:Cross-validation}
+We employed a K-fold cross-validation approach to train and evaluate the supervised methods discussed in this study. The dataset was divided into $8$ partitions, each corresponding to a different client. To prevent bias towards specific language styles, we ensured that each client's transcripts were included in either the training or testing set, but not in both. 
+
+\subsection{Evaluation Parameters} \label{sec:Evaluation Parameters}
+The performance of our framework was evaluated using $3$ metrics: narrative recall, narrative precision, and the weighted average f1-score between narrative and non-narrative labels (referenced in the paper as f1-score). 
+
+The f1-score is a common metric used in classification tasks, which takes into account both precision and recall to provide a balanced measure of performance. To consider the imbalance in class distribution, we used weighted average f1-scores. This means that f1-scores for each class are multiplied by the respective class support (number of instances) and then averaged to obtain the overall performance metric.
+
+We considered the nature of narrative detection as akin to a text segmentation task, where psychotherapy session transcripts are partitioned into segments of narrative and non-narrative content. To address this, we adjusted the f1-metric to incorporate near misses at narrative boundaries, a practice previously employed in studies focusing on text segmentation \cite{Fournier2013a}. This implies that if the model recognized a narrative boundary one sentence prior or one sentence subsequent to the precise narrative boundary point, the predicted label would still be regarded as accurate.
+
+We also utilized recall, which is synonymous with sensitivity, to measure the proportion of correctly identified positive instances among all actual narrative sentences. Precision was employed to assess the selectivity -- proportion of correctly identified narrative sentences among all instances predicted as positive.
+
+The recall for the narrative sentences holds greater significance for the task compared to precision. This is because in the context of therapy sessions, it is easier for a therapist to filter out additional sentences from a predicted narrative. However, if narrative sentences are missed and not included in the prediction, they cannot be recovered.
+
+\subsection{Models Selection} \label{sec:Models Selection}
+\subsubsection{Baseline Models}
+
+In our study, we employed three baseline models that allow us to establish a comprehensive benchmark against which we can measure the advancements and effectiveness of our novel approach. These baseline models encompass true label classifier, false label classifier and TF-IDF
+based classifier.
+
+\textbf{True Label Classifier}. This baseline classifier operates by assigning all instances to their true labels, effectively representing the simplest form of classification without any predictive modeling.
+
+\textbf{False Label Classifier}. Another baseline model we utilized assigns all instances to false labels, serving as a control to
+assess the inherent predictive power of our dataset and model evaluation metrics.
+
+\textbf{TF-IDF-based Classifier}. We also incorporated a basic classifier that relies solely on the TF-IDF features (words, lemmas and n-grams) extracted from the training data. This straightforward approach provides a
+reference point to gauge the additional benefits introduced by our proposed model.
+
+We trained multiple classifiers, including Support Vector Machine (SVM), Logistic Regression (LR), Passive Aggressive Classifier (PA), Decision Tree (DT), and Ridge classifier (Ridge), using TF-IDF encodings for words, lemmas, and 3-5 grams. Among these classifiers, the Ridge model achieved the highest classification results (weighted average f1-score of $0.726$).
+
+\subsubsection{BERT}
+In this study, we employed AlephBERT \cite{alephBert2021}, a large pre-trained language model designed for Modern Hebrew. 
+
+\subsubsection{CRF}
+We employed the CRF implementation provided by the sklearn-crfsuite toolkit \cite{CRFsuite} to create a structured sentence classifier.
+
+\subsubsection{Ensemble classifier}
+
+During the preliminary training experiments conducted on the framework, various ensemble methods were trained, including Decision Tree (DT), Logistic Regression with and without built-in cross-validation (LR CV and LR), Passive Aggressive (PA), Perceptron, Ridge, Support Vector Classification (SVC) and Stochastic Gradient Descent (SGD).  For training the ensemble models, we took the output values of the BERT and the CRF training. To test the ensemble models,  we took the BERT and the CRF predictions on the test set.
+
+
+\begin{table}[ht]
+    \centering
+     \def\arraystretch{1.5}
+     \begin{tabular}{l c}
+      \hline
+ estimator & f1-score\\ \hline
+SVC	& 0.792\\ %\hline
+Ridge	& 0.792\\ %\hline
+LR &	0.792\\% \hline
+LR CV &	0.790\\% \hline
+SGD &	0.789\\ %\hline
+CRF	& 0.787\\ %\hline
+Perceptron &	0.770\\ %\hline
+DT &	0.730\\ %\hline
+PA &	0.716\\% \hline
+\hline
+\end{tabular}
+\caption{A comparison of ensemble models' performance on sentence classification with threshold $0.5$}
+    \label{table:all.ens.result}
+\end{table}
+
+Among these methods, SVC emerged as the most effective and achieved the highest f1-score of $0.792$ (Table \ref{table:all.ens.result}) and was selected as the ensemble classifier. 
+The SVC f1-score reached $0.798$ after decreasing the classification threshold from the default value of $0.5$ to $0.26$. This adjustment was based on the fact that only $26\%$ of the sentences in the dataset had a positive narrative label. 
+
+\subsection{Evaluation of Component Performance} \label{sec:Component Performance}
+
+To analyze the effectiveness of different parts of the APhyND methodology, we measured the performance of each framework layer using weighted average f1-scores (higher is better), narrative recall and precision (higher is better). Figure \ref{fig:layers.impact} presents the experimental results of the above dataset and reflects the contribution of each component to overall performance compared to $3$ baselines (\emph{true only} stands for classifier that assigns the narrative label to all sentences, \emph{false only} -- for classifier that assigns non-narrative label to all sentences).
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{nn.f1.metrics.pdf}
+\caption{Framework components performance on narrative detection compared to the baselines}
+% \Description{Vertical bar chart with 3 groups of 5 bars each: each group represents metrics for 5 models: baseline, BERT, CRF, ensemble and APhyND. The first group is weighted average f1-score, APhynD is the highest bar. The second group is narrative precision, APhyNd is the highest bar. The third group is narrative recall, BERT is the highest bar.}
+\label{fig:layers.impact}
+\end{figure}
+
+As anticipated, the classifier using the "true" label achieves the highest recall for narrative instances. However, its f1-score remains notably low. Conversely, the classifier utilizing the "false" label attains a higher average f1-score since $76\%$ of its value comprises negative labels.
+
+The comparative analysis of CRF and BERT performance yields intriguing results. Notably, CRF demonstrates a superior f1-score and narrative precision compared to BERT, albeit with a lower narrative recall.
+
+To gain insights into this phenomenon,  Figure \ref{fig:segment.comparison} provides valuable information. The figure illustrates that the BERT model distributes narrative labels throughout the transcript without considering the continuous nature of the narrative. It results in scattered narrative predictions, giving a high narrative recall and low narrative precision.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{segments.compare.pdf}
+  \caption{Segments of narratives identified in 471 sentences of an arbitrary transcript}
+   \label{fig:segment.comparison}
+  % \Description{Segments of narratives identified in 471 sentences of an arbitrary transcript. The x axis represents sentence index from 0 to 471, the y axis consist of 6 rows of dashed lines, each row represents the model's distribution of narrative labels across the transcript.}
+\end{figure}
+
+The probable reason for these observations is that the BERT fails to account for the fact that narrative sentences occur in groups and does not consider any meta-features of the sentences. Conversely, the CRF model tends to correctly predict sequences of narrative sentences, but may overlook brief narratives and create occasional gaps in longer narratives.
+
+Another noteworthy finding is that the ensemble model effectively addresses the errors made by each individual model. It eliminates false-positive predictions made by BERT while preserving true-positive predictions made by the BERT that were missed by the CRF. However, it is important to note that the ensemble model still exhibits some "holes" in long sequences of correct predictions from CRF, which are caused by the contributions of BERT.
+
+The threshold adjustment and smoothing layer within the framework resulted in the increase of all the performance metrics comparing to the ensemble classifier. As depicted in Figure \ref{fig:segment.comparison}, the smoothing step eliminated certain standalone narrative sentences, including some true narratives that were predicted by the ensemble classifier. However, the smoothing layer helped to fill in the gaps created by single sentence inconsistencies that had infiltrated the ensemble's predictions from the BERT.
+
+\subsection{Framework Evaluation Results} \label{sec:Framework Evaluation}
+
+We compared APhyND against baseline and stand-alone BERT and CRF models using $3$ evaluation metrics, as presented in Table \ref{table:all.models.result}.
+
+\begin{table}[h!]
+    \centering
+     \def\arraystretch{1.5}
+     \begin{tabular}{c c | c c c c c c}
+      \hline
+      label & metric  & true only & false only & TF-IDF & BERT & CRF &  APhyND  \\ \hline
+       \multirow{2}{*}{narrative} 
+       &  recall & $\textbf{1.000}$ & $0.000$ & $0.261$ & $0.539$ & $0.454$ & $0.508$ \\
+       & precision & $0.260$ & $0.000$ & $0.534$ &	$0.500$	& $0.611$	& $\textbf{0.663}$ \\ \hline
+       \multirow{2}{*}{non-narrative} & recall	& $0.000$ &	$\textbf{1.000}$ &	$0.925$ &	$0.818$ &	$0.89$5 &	$0.905$ \\
+      & precision &	$0.000$ &	$0.740$ &	$0.788$ &	$0.841$ &	$0.834$ & $\textbf{0.849}$ \\ \hline
+    weighted avg & f1-score  & $0.110$ & $0.630$ & $0.726$ & $0.756$ & $0.782$ & $\textbf{0.804}$\\
+\hline
+\end{tabular}
+\caption{Performance of each model on narrative detection}
+    \label{table:all.models.result}
+\end{table}
+
+Overall, we see that \emph{our APhyND framework consistently outperforms baseline and stand-alone models in terms of accuracy of narrative detection}. We observe that narrative recall achieved by APhyND is twice as high as TF-IDF baseline model ($0.508$ vs $0.261$). The pre-trained BERT and CRF outperforming the simpler baseline on narrative recall and f1-score is perhaps not surprising. However, the fact that they achieve comparable but slightly worse results than APhyND suggests that the relatively simple ensemble technique of APhyND in combination with prediction smoothing are effective.
+
+The baseline tends to outperform the BERT layer of the framework in terms of narrative precision, but is behind in terms of recall. To interpret this diversity performance, we turn to the example in Figure \ref{fig:segment.comparison} and note that the baseline model, trained on TD-IDF vectors, in total assigns fewer narrative labels than the BERT model. The difference in performance could be attributed to TD-IDF's reliance on the weighting scheme and its focus on rare features. It leads to higher precision but potentially lower recall for positive labels compared to a model like BERT, which has the advantage of contextual understanding and is able to identify positive instances even if they are not solely reliant on specific rare features.
+
+Our model attained an weighted average f1-score of $0.804$, which present an significant enhancement over the outcome of a prior study focused on a comparable task, specifically story extraction from a less intricate corpus -— army officers interviews in English, where f1-score of $0.624$ was reached \cite{gordon2005automated}.
+
+Our observations reveal that our framework achieves superior performance in terms of f1-score compared to both the baselines and individually trained layers of the CRF and the BERT. This indicates that our framework effectively captures and discriminates between the negative instances as well as positive, resulting in improved overall performance.
+
+We can thus conclude that, among the algorithms tested, \emph{our algorithm finds the best balance between precision and recall in the identification of narrative sentences}.
+
+Considering these results, we conclude that \emph{our method is capable of identifying accurate narratives in psychology session transcripts}.
+
+\section{Conclusions and future work}
+
+This paper proposes the new machine learning framework APhyND to detect narratives in psychotherapy sessions. APhyND first leverages the semantic information and lexical content of a transcript's sentences from the BERT embedding.  Secondly, it utilizes the dependencies of sentences and their meta, lexical and positional features from the CRF model. Finally, APhyND employs combination of these algorithms to  eliminate the errors produced by each model and smooths the predictions in order to disregard the single-sentence artifacts. 
+
+Through evaluations against baseline and individual framework layers on a dataset of $38434$ sentences, we confirmed that our algorithm achieves the best overall results considering narrative detection.  This finding further proves that (1) the simple deep learning method like BERT and discriminative network CRF cannot provide the high performance of narrative detection, while by combining two models, more narrative information can be obtained, (2) compared with the BERT, the CRF can obtain a more dependent relationship between consecutive sentences, which can increase the accuracy of the method, and (3) prediction smoothing can also improve the narrative detection performance.
+
+
+% is a framework that combines two different machine learning models: a BERT and a CRF. TFirst, the approach captures the lexical content of the sentence and it’s position in a semantic space by the BERT embedding. Second, we utilize the CRF to investigate the dependencies of sentences in the transcript representation. The ensemble adds a mechanism to combine the predictions and eliminate the errors produced by these two models. The prediction smoothing allows to disregard the single-sentence artifacts.  We conduct our experiment on the dataset of 79 transcripts in Hebrew. The experimental results indicate that our models are efficient and outperform certain other models.
+
+The layered framework for automatic narrative detection presented in this paper offers a promising solution to the manual analysis limitations in psychotherapy sessions. By automating the narrative detection process, therapists can gain valuable insights efficiently, contributing to enhanced understanding and improved therapeutic outcomes.
+
+We identify several potential avenues of future work. The first option is to increase emphasis on the dataset, since performance of the machine learning framework is dependent on the quality and quantity of the data used to train it. The more transcripts that are available to the model, the more opportunities it has to learn the relationships between sentence features and narratives. Additionally, experiments on different ensemble approaches, other than stacking of the CRF and BERT could be performed. For example, bagging and boosting might provide different results. Another direction for further research might be to explore GPT3 as another potential model in addition to BERT. 
+
+\section*{Declaration of competing interest}
+
+No targeted grants from funding agencies in the public, commercial, or not-for-profit domains have been allocated to support this research.
+
+\section*{Acknowledgements}
+
+The authors acknowledge Dana Shenderovich and Mor Lavie for their brilliant corpus labeling work, and Dmitry Togushev for technical support that has contributed to the results reported within this article.
+
+\section*{Declaration of generative AI in the writing process}
+
+During the preparation of this work the author used ChatGPT-3.5 in order to improve language and readability. After using this service, the author reviewed and edited the content as needed and take full responsibility for the content of the publication.
+
+
+%% main text
+% \section{}
+% \label{}
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+ \bibliographystyle{elsarticle-num} 
+ \bibliography{cas-refs}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+% \begin{thebibliography}{00}
+
+%% \bibitem[Author(year)]{label}
+%% Text of bibliographic item
+
+% \bibitem[ ()]{}
+
+% \end{thebibliography}
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.
